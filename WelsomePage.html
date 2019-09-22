@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<!--Page title-->
+<div id="app" v-cloak>
+  <title>Welcome</title>
+
+<!--Mississauga Nav Bar-->
+
+        <nav class="navbar navbar-expand-lg navbar-default" v-cloak>
+          <a class="navbar-brand" href="https://web.mississauga.ca/">
+            <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
+            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">
+          </a>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active text-light" href="mapExample.html">Wifi Locations<span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/">City Page</a>
+              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/our-organization/about-our-organization/">About</a>
+              <a class="nav-item nav-link text-light" href="http://www.mississauga.ca/portal/residents/contact">Contact</a>
+
+            </div>
+
+          </div>
+
+<!--Nav bar longin-->
+          <div>
+            <a class="navbar-nav navbar-right">
+              <div class="font-weight-bold">
+                <label>Already have an account?</label>
+                <button class="btn btn-warning font-weight-bold">{{signinText}}</button>
+              </div>
+            </a>
+          </div>
+          </nav>
+
+<!-- Page Heading-->
+        <div class="text-center text-primary">
+          <h1  class="my-4">{{mainHeading}}</h1>
+          <h3 class="text-center">{{subHeading}}</h3>
+        </div>
+
+        <div class="container container-default mt-5">
+
+
+<!--************************************************************************************
+  Validation code work in progress-->
+
+  <!--
+            <div v-if="submitted && !validated" class="container col-md-3 col-3 mt-5">
+                <h4>Error</h4>
+                <h5 style="color:crimson" class="mt-3">{{validation}}</h5>
+              </div>
+-->
+
+<!--Creating a form-->
+<!--@submit.prevent="submit()"-->
+        <form v-if="!submitted" novalidate class="mt-3" action="" method="post">
+
+<!--Printing error messages on the form-->
+          <p v-if="errors.length">
+            <b style="color:firebrick">Please correct the following error(s):</b>
+            <ul>
+              <div class="font-weight-bold">
+                <li style="color:crimson" v-for="error in errors">*{{ error }}</li>
+              </div>
+            </ul>
+          </p>
+
+
+<!--Name Field for signup-->
+            <div class="form-group">
+                    <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" for="name">Name</span>
+                            </div>
+                            <input v-model="fname" type="text" aria-label="First name" class="form-control" placeholder="Firstname">
+                            <input v-model="lname" type="text" aria-label="Last name" class="form-control" placeholder="Lastname">
+                    </div>
+
+<!--Username field for signup-->
+                           <div class="form-group">
+                                <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text" id="basic-addon1" for="birthdate">Birthday</span>
+                                        </div>
+                                          <input v-model="bday" type="text" class="form-control" placeholder="Please enter your birthday(mm-dd-yyyy)" aria-label="bday" aria-describedby="basic-addon1" name="bday">
+                                </div>
+                          </div>
+
+<!--Email field for signup-->
+                          <div class="form-group">
+                                <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2" for="email">Email</span>
+                                              </div>
+                                        <input id="email"  v-model="email" type="email" class="form-control" placeholder="Enter your Email" aria-label="Recipient's username" name="email"
+                                          aria-describedby="basic-addon2">
+                                      </div>
+                          </div>
+
+
+
+<!-- field for Password-->
+                          <div class="form-group">
+                                <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text" id="basic-addon1" for="password">Password</span>
+                                        </div>
+                                          <input v-model="password" type="password" class="form-control" placeholder="Enter a unique Password" aria-label="Password" aria-describedby="basic-addon1">
+                                </div>
+
+<!--Email field for Confirm password-->
+                                <div class="input-group">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text" id="basic-addon1" for="confirmpassword">Confirm Password</span>
+                                        </div>
+                                          <input v-model="confirmpassword" type="password" class="form-control" placeholder="Re-enter Password" aria-label="Password" aria-describedby="basic-addon1">
+                                </div>
+                          </div>
+
+<!--Signup button-->
+                          <div class="form-group">
+                                <label>There you go!</label>
+                                <button v-cloak @click.prevent="process" type="submit" class="btn btn-primary">Create Account</button>
+                            </div>
+
+<!--Signin button-->
+                          <div class="form-group">
+                                <label>Already have an account?</label>
+                                <button class="btn btn-primary"><a style="color:white" href="login.html">{{signinText}}</a></button>
+                          </div>
+
+
+
+                 </div>
+        </form>
+    </div>
+
+
+
+<!--For Wesite decribtion only visible when not submitted -->
+    <div v-if="!submitted" class="container container-default-intro col-md-5 col-md-3">
+    <div class="appinfo text-muted">
+
+      <h5>A step towards a smarter mississauga. In partnership with Sheridan College</h5>
+      <p>City of mississauga is known for its advance tecnological development. This website is built in partnership with Sheridan Faculty of Applied Science & Technology</p>
+      <div>
+        <p>This app is designed by Sheridan capstone students. To help create a differnece in todays society.
+          By using this app you will be able to see all the interenet access points located across city of mississauga.
+          This inludes libraries, univerities/colleges, Go sataions, Comunity centers, malls and much more.
+        </p>
+        <h5>Create an account to get started</h5>
+      </div>
+      <br>
+<!--Sheridna Logo and rights reserved-->
+      <p>
+      <a class="sheridan-brand" href="https://www.sheridancollege.ca/">
+        <img src="images/sheridanicon.png" width="35px" height="35px" class="d-inline-block align-top" alt="">
+
+      </a>
+      By Sheridan&reg;
+    </p>
+    </div>
+  </div>
+
+
+<!--after submission uses VUE submitted method and if the form is validated -->
+<div v-if="submitted && validated" class="container col-md-3 col-3 mt-5">
+  <h4>Your account has been created</h4>
+  <h5 style="color:crimson" class="mt-3">please confirm you email and then sign in</h5>
+  <button class="btn btn-primary"><a style="color:white" href="login.html">{{signinText}}</a></button>
+</div>
+
+<div v-if="submitted && !validated" class="container col-md-3 col-3 mt-5">
+    <h4>Error</h4>
+    <h5 style="color:crimson" class="mt-3">{{validation}}</h5>
+  </div>
+
+</div>
+
+<!--Initiating vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+//var url = 'http://142.55.32.86:50224/SmartSaugaServer/registerUser/' + vm.email + '/' + vm/password + '/verifired/Citizen/' + 'Sept';
+
+//var url = url = "http://142.55.32.86:50224/SmartSaugaServer/registerUser/Front@gmail.com/passwierd/Fred/verifired/Citizen/Sept";
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+
+        mainHeading: 'SmartSauga',
+        subHeading: 'Making a smarter community',
+        pagetitle: 'Welcome to SmartSauga',
+        signinText: 'Sign in',
+        validation: "*Feild Required",
+
+
+        errors:[],
+        fname: null,
+        bday: null,
+        lname: null,
+        username: null,
+        email: null,
+        password: null,
+        confirmpassword: null,
+        submitted: false,
+        validated : false,
+
+
+
+    },
+
+  methods: {
+
+    //On submit method
+    process: function(e){
+      this.errors = [];
+
+      if(vm.fname === null || vm.fname == "undefined" ){
+        this.validated = false;
+         this.errors.push("Firstname required.");
+        console.log('Please enter your first name');
+      }else if(!this.validName(this.fname)) {
+        this.validated = false;
+        this.errors.push('Please enter a valid First name');
+      }
+      if (vm.lname === null || vm.lname  == "undefined"){
+        this.validated = false;
+        this.errors.push("Lastname required.");
+        console.log('Please enter your last name');
+      }else if(!this.validName(this.lname)) {
+        this.validated = false;
+        this.errors.push('Please enter a valid Last name');
+      }
+      if (vm.bday === null || vm.bday  == "undefined"){
+        this.validated = false;
+        this.errors.push("Birthday cannot be null");
+        console.log('Please enter your last name');
+      }else if(!this.validBirthdate(this.bday)) {
+        this.validated = false;
+        this.errors.push('Birthdate should be mm-dd-yyyy format');
+      }
+      if (vm.email === null || vm.email == "undefined"){
+        this.validated = false;
+        this.errors.push("Email cannot be empty");
+
+      } else if(!this.validEmail(this.email)) {
+        this.validated = false;
+        this.errors.push('Valid email required.');
+      }
+      if (vm.password === null || vm.password == "undefined"){
+        this.validated = false;
+        this.errors.push("Please enter a valid password");
+
+      }else if(!this.validPassword(this.password)) {
+        this.validated = false;
+        this.errors.push('Invalid Password: Password should be 6 to 8 characters long with atleast one digit and no special character');
+      }
+      if (vm.confirmpassword === null || vm.confirmpassword == "undefined"){
+        this.validated = false;
+        this.errors.push("Confirm password cannot be empty");
+
+      }else if(!(vm.password == vm.confirmpassword)){
+        this.validated = false;
+        this.errors.push("Password and Confirm passwords should match");
+
+      }
+
+     if (!this.errors.length) {
+       vm.fname = (vm.fname).toLowerCase();
+       vm.fname = ((vm.fname).charAt(0).toUpperCase() + (vm.fname).substring(1));
+
+       vm.lname = (vm.lname).toLowerCase();
+       vm.lname = ((vm.lname).charAt(0).toUpperCase() + (vm.lname).substring(1));
+       console.log(vm.fname);
+        console.log(vm.fname);
+
+
+         axios.post('http://142.55.32.86:50224/SmartSaugaServer/registerUser/'+vm.email+'/'+vm.password+'/'+vm.fname+'/'+vm.lname+'/'+'Not Approved/Citizen/'+vm.bday)
+         .then(function (res){
+           if(res.data == 1){
+             vm.validated = true;
+             vm.submitted = true;
+             console.clear;
+             console.log(res)
+           }else{
+             vm.errors= [];
+             vm.errors.push("Email is already registered");
+             console.log("OOPSIES");
+           }
+
+         });
+     }
+    },
+    validName: function (name) {
+        var rn = /^[A-Za-z]+$/;
+        return rn.test(name);
+      },
+    validEmail: function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      },
+    validPassword: function(password){
+      var rp = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,8}$/;
+      return rp.test(password);
+    },
+    validBirthdate: function(bday){
+      var rb = /^(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])\-(19|20)\d{2}$/;
+      return rb.test(bday);
+    }
+  }
+
+
+});
+
+
+</script>
+
+<!-- <div v-if="submitted && !validated" class="container col-md-3 col-3 mt-5">
+    <h4>Error</h4>
+    <h5 style="color:crimson" class="mt-3">{{validation}}</h5>
+  </div> -->

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<!--Page title-->
+<div id="app">
+  <title>{{pagetitle}}</title>
+
+<!--Mississauga SysAdmin Nav Bar-->
+<div>
+        <nav class="navbar navbar-expand-lg navbar-default">
+          <a class="navbar-brand" href="https://web.mississauga.ca/">
+            <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
+            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">      
+          </a>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active text-light" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/">City Page</a>
+              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/our-organization/about-our-organization/">About</a>
+              <a class="nav-item nav-link text-light" href="http://www.mississauga.ca/portal/residents/contact">Contact</a>
+            </div>
+
+          </div>
+
+          <!--Nav bar longin-->
+          <div>
+                <a class="navbar-nav navbar-right">            
+                  <div class="font-weight-bold text-warning">
+                    <label>Hello</label>
+                    <label>{{sysadmin}}</label>
+                  </div>
+                </a>
+              </div>
+            </nav>
+</div>
+<!--Page Headings-->
+            <div class="text-center text-primary">
+                    <h1  class="my-4" v-cloak>{{mainHeading}}</h1>
+                    <h3 class="text-center">{{subHeading}}</h3>
+                  </div>
+          
+            <div class="container container-default1 mt-5">
+                
+                <div>
+                    <p>
+                        To Add, edit or delete locations
+                        <div class="col-2">
+                            <button class="btn btn-primary font-weight-bold">Locations</button>
+                        </div>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        To live view IOT speeds
+                        <div class="col-2">
+                            <button class="btn btn-primary font-weight-bold">Live</button>
+                        </div>
+                    </p>
+                </div>
+                
+                <div>
+                    <p>
+                        Manage Users
+                        <div class="col-2">
+                          <button class="btn btn-primary font-weight-bold">Users</button>
+                        </div>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        To generate a IOT report
+                        <div class="col-3">
+                          <button class="btn btn-primary font-weight-bold">Reports</button>
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+
+</div>
+<!--Initiating Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+<script>
+        var vmHeaders = new Vue({
+            el: '#app',
+            data: {
+                mainHeading: 'SmartSauga',
+                subHeading: 'Application Administrator',
+                pagetitle: 'Admin Portal - Smartsauga',
+                sysadmin: 'Adminfetest'
+                   
+            },
+        
+        
+        });
+        </script>

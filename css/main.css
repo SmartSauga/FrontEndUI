@@ -1,0 +1,39 @@
+body {background-color: paleturquoise;}
+
+/*for navbar*/
+.navbar-default {
+    background-color: #007acc;
+    height: 80px;
+  }
+
+  /*for account creation container*/
+.container-default{
+    position: absolute;
+    background-color: gainsboro;
+    right: 220px;
+    width: auto;
+    height: auto;
+    
+}
+
+.signincontainer{
+  width: 500px;
+}
+
+/*Website introductiion on the main screen*/
+.container-default-intro{
+
+    position: absolute;
+    background-color: none;
+    left: 100px;
+    top: 300px;
+    width: 80vh;
+    height: 30vh;
+}
+
+/*Hides and shows intro acording to the lenth of the browser*/
+@media screen and (max-width: 1500px) {
+    .container-default-intro {
+      display: none;
+    }
+}    

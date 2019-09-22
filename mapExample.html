@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Google Maps Multiple Markers</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+            <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+              <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+
+
+
+  <form>   
+
+    <!--Mississauga Nav Bar-->
+      <div>
+          <nav class="navbar navbar-expand-lg navbar-default">
+            <a class="navbar-brand" href="https://web.mississauga.ca/">
+              <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
+              <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">
+            </a>
+  
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active text-light" href="WelsomePage.html">Home</a>
+                <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/">City Page</a>
+                <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/our-organization/about-our-organization/">About</a>
+                <a class="nav-item nav-link text-light" href="http://www.mississauga.ca/portal/residents/contact">Contact</a>
+              </div>
+  
+            </div>
+<!--Nav bar longin-->
+<div>
+  <a class="navbar-nav navbar-right">
+    <div class="font-weight-bold">
+      <label>Already have an account?</label>
+      <button class="btn btn-warning font-weight-bold">Sign in</button>
+    </div>
+  </a>
+</div>
+</nav>
+
+          <div class="text-center text-primary">
+              <h1  class="my-4">Locations near you</h1>
+              <h3 class="text-center">Go ahead and connect to our internet</h3>
+            </div>
+  
+          <div class="signincontainer mt-5 mx-auto" >
+
+  <div id="map" style="width: 500px; height: 400px;"></div>
+
+</form>
+  <script type="text/javascript">
+  var long0;
+  var lat0;
+  var long1;
+  var lat1;
+  var long2;
+  var lat2;
+  var long3;
+  var lat3;
+  var long4;
+  var lat4;
+  var long5;
+  var lat5;
+  var long6;
+  var lat6;
+  var long7;
+  var lat7;
+  var long8;
+  var lat8;
+  var long9;
+  var lat9;
+
+
+  function initMap() {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://142.55.32.86:50224/SmartSaugaServer/GetLocations",
+        xhrFields: {
+            withCredentials: false
+        },
+        success: function(data) {
+            console.log(data);
+
+           var map = new google.maps.Map(document.getElementById('map'), {
+             zoom: 13,
+             center: new google.maps.LatLng(43.532840, -79.623770),
+             mapTypeId: google.maps.MapTypeId.ROADMAP,
+           })
+
+           var infowindow = new google.maps.InfoWindow({})
+
+           var marker, i
+
+           var geocoder = new google.maps.Geocoder();
+
+           for (i = 0; i < data.length; i++) {
+                console.log(data[i].name);
+
+             //console.log("Lorne Lat Value" + lorne.lat);
+             marker = new google.maps.Marker({
+
+               position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
+               map: map,
+             })
+
+             google.maps.event.addListener(
+               marker,
+               'click',
+               (function(marker, i) {
+                 return function() {
+                   geocoder.geocode({
+                     latLng: new google.maps.LatLng(data[i].latitude, data[i].longitude)
+                   },
+                   function(responses) {
+                     if (responses && responses.length > 0)
+                     {
+                        var addr = (responses[0].formatted_address).split(' ').join('+');
+                       infowindow.setContent("<strong>"+data[i].name+"</strong>" + "</br>" + responses[0].formatted_address + "</br>" + "<a href='"+"https://www.google.com/maps/dir//"+addr+"/@"+data[i].latitude+","+data[i].longitude+",17z'> Get Directions </a>")
+                       infowindow.open(map, marker)
+                      // alert(responses[0].formatted_address);
+                     } else {
+                       alert('Cannot determine address at this location.');
+                     }
+                   });
+
+                 }
+               })(marker, i)
+             )
+           }
+            }
+
+    });
+}//end of initmap
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjUmhbbm_UPCWlNP97Owsa9gBAZiGEPcE&callback=initMap"
+          type="text/javascript"></script>
+
+</html>
