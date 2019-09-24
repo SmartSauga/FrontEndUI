@@ -1,4 +1,20 @@
-body {background-color: paleturquoise;}
+body {
+  background-color: paleturquoise;
+  
+}
+
+footer
+{
+    font-size:small;
+    color: aliceblue;
+    text-align:center;
+    bottom: 0;
+    height:75px;
+    background-color:black;
+    clear: both;
+    position: fixed;
+
+}
 
 /*for navbar*/
 .navbar-default {
