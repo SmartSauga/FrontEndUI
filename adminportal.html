@@ -55,7 +55,7 @@
                     </div> 
 
                     <div class="col">
-                      <button class="btn btn-primary font-weight-bold">Manage</button>
+                      <button class="btn btn-primary font-weight-bold" @click.natve='lcoationbtnClick'>Locations</button>
                     </div>
                     
                 </div>
@@ -83,7 +83,7 @@
                   </div>
                   
                         <div class="col">
-                          <button class="btn btn-primary font-weight-bold">Users</button>
+                          <button class="btn btn-primary font-weight-bold" @click.natve='userbtnClick'>Users</button>
                         </div>  
                 </div>
 
@@ -135,7 +135,14 @@
                 sysadmin: 'Admintest'
                    
             },
-        
+        methods:{
+          userbtnClick:function(event){
+            window.open("/Capstone-FrontEnd/adminuser.html");
+          },
+          lcoationbtnClick:function(event){
+            window.open("/Capstone-FrontEnd/adminlocation.html");
+          }
+        }
         
         });
         </script>
