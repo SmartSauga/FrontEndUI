@@ -43,7 +43,7 @@
             </div>
 
 <!--Creating a container-->
-            <div class=" mt-5 text-center w-100">
+            <div class="container mt-5 text-center w-100">
 
 
                 <table class="table">
@@ -53,6 +53,14 @@
                             <th>Location Name</th>
                             <th>Address Name</th>
                             <th>IOT speeds</th>
+
+                            <!--Button in the table to refresh the page-->  
+                            <th>
+                                <div class="text-right">
+                                  <button class="btn btn-secondary" @click.natve='refreshbtnClick'>Refresh</button>
+                                </div>
+                            </th> 
+
                         </tr>
                     </thead>
                     <tbody>
@@ -114,7 +122,7 @@
                 mainHeading: 'SmartSauga',
                 subHeading: 'Locations Management',
                 pagetitle: 'Manage Locations - Smartsauga',
-                sysadmin: 'Admintest'
+                sysadmin: 'Admin'
                    
             },
         

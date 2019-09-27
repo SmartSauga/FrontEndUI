@@ -43,8 +43,7 @@
             </div>
 
 <!--Creating a container-->
-            <div class=" mt-5 text-center w-100">
-
+            <div class="container mt-4 text-center w-100">          
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -53,12 +52,23 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>D.O.B</th>
+                            <th>Type</th>
+                            <th>Status</th>
+
+<!--Button in the table to refresh the page-->  
+                            <th>
+                              <div class="text-right">
+                                <button class="btn btn-secondary" @click.natve='refreshbtnClick'>Refresh</button>
+                              </div>
+                            </th> 
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Clark</td>
+                            <td>Clarkson</td>
                             <td>Kent</td>
                             <td>clarkkent@mail.com</td>
                         </tr>
@@ -82,6 +92,9 @@
 
 
             </div>
+
+
+
 
 </div>
 
@@ -114,9 +127,16 @@
                 mainHeading: 'SmartSauga',
                 subHeading: 'User Management',
                 pagetitle: 'Manage User - Smartsauga',
-                sysadmin: 'Admintest'
+                sysadmin: 'Admin'
                    
             },
+            methods:{
+              //method for refreshing the page
+              refreshbtnClick: function(){
+                window.location.reload();
+              }
+            
+            }
         
         
         });
