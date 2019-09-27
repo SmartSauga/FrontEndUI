@@ -61,8 +61,8 @@
 
                             <!--Button in the table to refresh the page-->  
                             <th>
-                                <div class="text-right">
-                                  <button class="btn btn-secondary" @click.natve='refreshbtnClick'>Refresh</button>
+                                <div class="text-center">
+                                  <button class="btn btn-primary" @click.natve='refreshbtnClick'><img src="images/reloadicon.png" width="30px" height="30px"></button>
                                 </div>
                             </th> 
 
@@ -130,7 +130,13 @@
                 sysadmin: 'Admin'
                    
             },
-        
+            methods:{
+              //method for refreshing the page
+              refreshbtnClick: function(){
+                window.location.reload();
+              }
+            
+            }
         
         });
         </script>
