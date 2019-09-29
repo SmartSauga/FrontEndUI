@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col">
-                       <button class="btn btn-primary font-weight-bold">Status</button>
+                       <button class="btn btn-primary font-weight-bold" @click.natve='statusbtnClick' >Status</button>
                     </div>
                     
                 </div>
@@ -143,6 +143,9 @@
           //methods for new window for admin locataions on click
           lcoationbtnClick:function(event){
             window.open("/Capstone-FrontEnd/adminlocation.html");
+          },
+          statusbtnClick:function(event){
+            window.open("/Capstone-FrontEnd/adminstatus.html");
           }
         }
         

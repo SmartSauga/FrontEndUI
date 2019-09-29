@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<!--Page title-->
+<div id="app">
+  <title>{{pagetitle}}</title>
+
+<!--Mississauga SysAdmin Nav Bar-->
+<div>
+        <nav class="navbar navbar-expand-lg navbar-default">
+          <a class="navbar-brand" href="https://web.mississauga.ca/">
+            <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
+            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">      
+          </a>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active text-light" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/">City Page</a>
+              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/our-organization/about-our-organization/">About</a>
+              <a class="nav-item nav-link text-light" href="http://www.mississauga.ca/portal/residents/contact">Contact</a>
+            </div>
+
+          </div>
+
+          <!--Nav bar longin-->
+          <div>
+                <a class="navbar-nav navbar-right">            
+                  <div class="font-weight-bold text-warning">
+                    <label></label>
+                    <label>{{sysadmin}}</label>
+                  </div>
+                </a>
+              </div>
+            </nav>
+</div>
+<!--Page Headings-->
+            <div class="text-center text-primary">
+                    <h1  class="my-3" v-cloak>{{mainHeading}}</h1>
+                    <h3 class="text-center">{{subHeading}}</h3>
+            </div>
+
+<!--Creating a container-->
+            <div class=" mt-4 text-center w-100">          
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Location ID</th>
+                            <th>Location Name</th>
+                            <th>Location Address</th>
+                            <th>IP Address</th>
+                            <th>Mac Address</th>
+                            <th>Description</th>
+                            <th>Download</th>
+                            <th>Upload</th>
+                            <th>Ping</th>
+                            <th>Status</th>
+                            
+
+<!--Button in the table to refresh the page-->  
+                            <th>
+                              <div class="text-center">
+                                  <button class="btn btn-primary" @click.natve='refreshbtnClick'><img src="images/reloadicon.png" width="30px" height="30px"></button>
+                              </div>
+                            </th> 
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>105</td>
+                            <td>Test</td>
+                            <td>Test Dr, Missisauga, ON</td>
+                            <td>10.65.23.200</td>
+                            <td>AA-07-A0-5C-00-5G</td>
+                            <td>Broadband</td>
+                            <td>100 Mbps</td>
+                            <td>20 Mbps</td>
+                            <td>15</td>
+                            <td class="text-info">Good</td>
+                        </tr>
+                        <tr>
+                            <td>105</td>
+                            <td>Test2</td>
+                            <td>Test2 Dr, Missisauga, ON</td>
+                            <td>10.65.23.200</td>
+                            <td>AA-07-A0-5C-00-5G</td>
+                            <td>Broadband</td>
+                            <td>50 Mbps</td>
+                            <td>10 Mbps</td>
+                            <td>20</td>
+                            <td class="text-secondary">Average</td>
+                        </tr>
+                        <tr>
+                            <td>105</td>
+                            <td>Test3</td>
+                            <td>Test3 Dr, Missisauga, ON</td>
+                            <td>10.65.23.200</td>
+                            <td>AA-07-A0-5C-00-5G</td>
+                            <td>Broadband</td>
+                            <td>10 Mbps</td>
+                            <td>0.1 Mbps</td>
+                            <td>85</td>
+                            <td class="text-danger">Poor</td>
+                        </tr>            
+                    </tbody>
+                </table>
+
+
+
+
+
+            </div>
+
+
+
+
+</div>
+
+
+
+<!-- Footer -->
+<footer class="page-footer font-small footer-dark w-100">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">SmartSauga&reg Sheridan&reg 2019
+    <br><a href="https://www.sheridancollege.ca/academics/faculties/applied-science-and-technology/applied-computing/events"> Sheridan Capstone Showcase</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+
+<!--************************************************************  Script    ************************************************************************************-->
+
+
+<!--Initiating Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+<script>
+        var vmHeaders = new Vue({
+            el: '#app',
+            data: {
+                mainHeading: 'SmartSauga',
+                subHeading: 'IOT Status',
+                pagetitle: 'IOT Status - Smartsauga',
+                sysadmin: 'Admin'
+                   
+            },
+            methods:{
+              //method for refreshing the page
+              refreshbtnClick: function(){
+                window.location.reload();
+              }
+            
+            }
+        
+        
+        });
+        </script>
+
+<!--Script-->
+
+
