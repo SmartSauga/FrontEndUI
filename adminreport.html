@@ -29,7 +29,6 @@
           <div>
                 <a class="navbar-nav navbar-right">            
                   <div class="font-weight-bold text-warning">
-                    <label>Hello</label>
                     <label>{{sysadmin}}</label>
                   </div>
                 </a>
@@ -51,11 +50,11 @@
                 <div class="row">
 
                     <div class="col">
-                      <p>Manage Locations</p>
+                      <p>Daily reports</p>
                     </div> 
 
                     <div class="col">
-                      <button class="btn btn-primary font-weight-bold" @click.natve='lcoationbtnClick'>Locations</button>
+                      <button class="btn btn-primary font-weight-bold" @click.natve='lcoationbtnClick'>View</button>
                     </div>
                     
                 </div>
@@ -65,11 +64,11 @@
                 <div class="row mt-5">
 
                     <div class="col">
-                      <p>Monitor IOTS</p>
+                      <p>Weekly Reports</p>
                     </div>
 
                     <div class="col">
-                       <button class="btn btn-primary font-weight-bold" @click.natve='statusbtnClick' >Status</button>
+                       <button class="btn btn-primary font-weight-bold" @click.natve='statusbtnClick' >View</button>
                     </div>
                     
                 </div>
@@ -79,22 +78,22 @@
                 <div class="row mt-5">
                   
                   <div class="col">
-                      <p>Users Managemnt</p>
+                      <p>Monthly reports</p>
                   </div>
                   
                         <div class="col">
-                          <button class="btn btn-primary font-weight-bold" @click.natve='userbtnClick'>Users</button>
+                          <button class="btn btn-primary font-weight-bold" @click.natve='userbtnClick'>View</button>
                         </div>  
                 </div>
 
 <!--Manage Reports-->
                 <div class="row mt-5">
                   <div class="col">
-                    <p>Generate IOT Reports</p>
+                    <p>Yearly Reports</p>
                   </div>
                     
                   <div class="col">
-                    <button class="btn btn-primary font-weight-bold" @click.natve='reportbtnClick'>Reports</button>
+                    <button class="btn btn-primary font-weight-bold">View</button>
                   </div>
                     
                 </div>
@@ -130,9 +129,9 @@
             el: '#app',
             data: {
                 mainHeading: 'SmartSauga',
-                subHeading: 'Application Administrator',
-                pagetitle: 'Admin Portal - Smartsauga',
-                sysadmin: 'Admintest'
+                subHeading: 'Reports',
+                pagetitle: 'IOT Reports - Smartsauga',
+                sysadmin: 'Admin'
                    
             },
         methods:{
@@ -146,9 +145,6 @@
           },
           statusbtnClick:function(event){
             window.open("/Capstone-FrontEnd/adminstatus.html");
-          },
-          reportbtnClick:function(event){
-            window.open("/Capstone-FrontEnd/adminreport.html");
           }
         }
         
