@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <!--Page title-->
 <div id="app">
@@ -75,7 +76,22 @@
                       <td>{{rd.latitude}}</td>
                       <td>{{rd.longitude}}</td>
                       <td>{{rd.locationRating}}</td>
-                      
+                      <td class="row">          
+                          
+                          <a href="#" class="btn btn-primary a-btn-slide-text col mx-1">
+                              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                              <span><strong>Update</strong></span>            
+                          </a>
+                          <a href="#" class="btn btn-secondary a-btn-slide-text col mx-1">
+                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                              <span><strong>Delete</strong></span>            
+                          </a>
+                          <a href="#" class="btn btn-primary a-btn-slide-text col mx-1">
+                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                               <span><strong>Block/Unblock</strong></span>            
+                           </a>
+
+                      </td>
 
 
 
