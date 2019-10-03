@@ -12,7 +12,7 @@
         <nav class="navbar navbar-expand-lg navbar-default">
           <a class="navbar-brand" href="https://web.mississauga.ca/">
             <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
-            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">      
+            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">
           </a>
 
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -27,7 +27,7 @@
 
           <!--Nav bar longin-->
           <div>
-                <a class="navbar-nav navbar-right">            
+                <a class="navbar-nav navbar-right">
                   <div class="font-weight-bold text-warning">
                     <label></label>
                     <label>{{sysadmin}}</label>
@@ -43,7 +43,7 @@
             </div>
 
 <!--Creating a container-->
-            <div class="container mt-4 text-center w-100">          
+            <div class="container mt-4 text-center w-100">
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -56,43 +56,28 @@
                             <th>Type</th>
                             <th>Status</th>
 
-<!--Button in the table to refresh the page-->  
+<!--Button in the table to refresh the page-->
                             <th>
                               <div class="text-center">
                                   <button class="btn btn-primary" @click.natve='refreshbtnClick'><img src="images/reloadicon.png" width="30px" height="30px"></button>
                               </div>
-                            </th> 
+                            </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Clarkson</td>
-                            <td>Kent</td>
-                            <td>clarkkent@mail.com</td>
-                            <td>12/01/1996</td>
-                            <td>citizen</td>
-                            <td>Verified</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>John</td>
-                            <td>Carter</td>
-                            <td>johncarter@mail.com</td>
-                            <td>12/01/1996</td>
-                            <td>citizen</td>
-                            <td>Not verfied</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Peter</td>
-                            <td>Parker</td>
-                            <td>peterparker@mail.com</td>
-                            <td>12/01/1996</td>
-                            <td>citizen</td>
-                            <td>Blocked</td>
-                        </tr>            
+                      <!-- display data received from back-end and stored in rowData array, in the table -->
+                      <tr v-for="rd in rowData" >
+                          <td>{{rd.userId}}</td>
+                          <td>{{rd.firstname}}</td>
+                          <td>{{rd.lastname}}</td>
+                          <td>{{rd.email}}</td>
+                          <td>{{rd.userBirthdate}}</td>
+                          <td>{{rd.type}}</td>
+                          <td>{{rd.status}}</td>
+
+                          <td><a href="#">Take Action</a></td>
+                      </tr>
                     </tbody>
                 </table>
 
@@ -128,29 +113,41 @@
 
 <!--Initiating Vue.js-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
         var vmHeaders = new Vue({
             el: '#app',
+            created: function(){
+
+              this.addDataToPage();
+
+            },
             data: {
                 mainHeading: 'SmartSauga',
                 subHeading: 'User Management',
                 pagetitle: 'Manage User - Smartsauga',
-                sysadmin: 'Admin'
-                   
+                sysadmin: 'Admin',
+                rowData: []
+
             },
             methods:{
               //method for refreshing the page
               refreshbtnClick: function(){
                 window.location.reload();
+              },
+              //method to call the back-end url and store data received from backend into rowData array
+              addDataToPage: function(){
+                axios.get('http://142.55.32.86:50224/SmartSaugaServer/GetUserData')
+                .then(function (res){
+                  this.rowData = res.data;
+                  console.log(res.data);
+                }.bind(this));
               }
-            
+
             }
-        
-        
+
+
         });
         </script>
 
 <!--Script-->
-
-
