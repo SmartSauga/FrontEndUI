@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
 <!--Page title-->
@@ -14,7 +12,7 @@
         <nav class="navbar navbar-expand-lg navbar-default">
           <a class="navbar-brand" href="https://web.mississauga.ca/">
             <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
-            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">      
+            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">
           </a>
 
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -29,7 +27,7 @@
 
           <!--Nav bar longin-->
           <div>
-                <a class="navbar-nav navbar-right">            
+                <a class="navbar-nav navbar-right">
                   <div class="font-weight-bold text-warning">
                     <label></label>
                     <label>{{sysadmin}}</label>
@@ -57,45 +55,30 @@
                             <th>Address</th>
                             <th>Lattitude</th>
                             <th>Longitude</th>
-                            <th>Location Status</th>
                             <th>IOT Rating</th>
-                            <th>Live: IOT Speed</th>
-
-                            <!--Button in the table to refresh the page-->  
+                            <!--Button in the table to refresh the page-->
                             <th>
                                 <div class="text-center">
                                   <button class="btn btn-primary" @click.natve='refreshbtnClick'><img src="images/reloadicon.png" width="30px" height="30px"></button>
                                 </div>
-                            </th> 
+                            </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>test location</td>
-                            <td>5555 text Cres mississauga</td>
-                            <td>35</td>
-                            <td>4651</td>
-                            <td>6541</td>
-                            <td>Good</td>
-                            <td>5</td>
-                            <td>5.0</td>
-                            <td> <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>test location</td>
-                            <td>5555 text Cres mississauga</td>
-                            <td>35</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>test location</td>
-                            <td>5555 text Cres mississauga</td>
-                            <td>35</td>
-                        </tr>            
+                      <tr v-for="rd in rowData">
+
+                      <td>{{rd.locationId}}</td>
+                      <td>{{rd.category}}</td>
+                      <td>{{rd.name}}</td>
+                      <td>{{rd.address}}</td>
+                      <td>{{rd.latitude}}</td>
+                      <td>{{rd.longitude}}</td>
+                      <td>{{rd.locationRating}}</td>
+
+
+
+                    </tr>
                     </tbody>
                 </table>
 
@@ -128,28 +111,39 @@
 
 <!--Initiating Vue.js-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
         var vmHeaders = new Vue({
             el: '#app',
+            created: function(){
+
+              this.addDataToPage();
+
+            },
             data: {
                 mainHeading: 'SmartSauga',
                 subHeading: 'Locations Management',
                 pagetitle: 'Manage Locations - Smartsauga',
-                sysadmin: 'Admin'
-                   
+                sysadmin: 'Admin',
+                rowData:[]
+
             },
             methods:{
               //method for refreshing the page
               refreshbtnClick: function(){
                 window.location.reload();
+              },
+              //method to call the back-end url and store data received from backend into rowData array
+              addDataToPage: function(){
+                axios.get('http://142.55.32.86:50224/SmartSaugaServer/GetLocations')
+                .then(function (res){
+                  this.rowData = res.data;
+                }.bind(this));
               }
-            
+
             }
-        
+
         });
         </script>
 
 <!--Script-->
-
-
