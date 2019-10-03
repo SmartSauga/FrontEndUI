@@ -12,7 +12,7 @@
         <nav class="navbar navbar-expand-lg navbar-default">
           <a class="navbar-brand" href="https://web.mississauga.ca/">
             <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
-            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">      
+            <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">
           </a>
 
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -27,7 +27,7 @@
 
           <!--Nav bar longin-->
           <div>
-                <a class="navbar-nav navbar-right">            
+                <a class="navbar-nav navbar-right">
                   <div class="font-weight-bold text-warning">
                     <label></label>
                     <label>{{sysadmin}}</label>
@@ -43,7 +43,7 @@
             </div>
 
 <!--Creating a container-->
-            <div class=" mt-4 text-center w-100">          
+            <div class=" mt-4 text-center w-100">
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -58,198 +58,34 @@
                             <th>Upload</th>
                             <th>Ping</th>
                             <th>Status</th>
-                            
 
-<!--Button in the table to refresh the page-->  
+
+<!--Button in the table to refresh the page-->
                             <th>
                               <div class="text-center">
                                   <button class="btn btn-primary" @click.natve='refreshbtnClick'><img src="images/reloadicon.png" width="30px" height="30px"></button>
                               </div>
-                            </th> 
+                            </th>
 
                         </tr>
                     </thead>
+                    <!-- table data that displays status of locations stored in database -->
+                    <!-- rd is variable and rowData is array that stores the location data -->
                     <tbody>
-                        <tr>
-                            <td>105</td>
-                            <td>Test</td>
-                            <td>Test Dr, Missisauga, ON</td>
-                            <td>10.65.23.200</td>
-                            <td>AA-07-A0-5C-00-5G</td>
-                            <td>Wireless</td>
-                            <td>100 Mbps</td>
-                            <td>20 Mbps</td>
-                            <td>15</td>
-                            <td class="text-info">Good</td>
+                        <tr v-for="rd in rowData" >
+                            <td>{{rd.locationId}}</td>
+                            <td>{{rd.name}}</td>
+                            <td>{{rd.address}}</td>
+                            <td>{{rd.ipAddress}}</td>
+                            <td>{{rd.macAddress}}</td>
+                            <td>{{rd.description}}</td>
+                            <td>{{rd.downloadSpeed}}</td>
+                            <td>{{rd.uploadSpeed}}</td>
+                            <td>{{rd.ping}}</td>
+                            <td class="text-info">{{rd.status}}</td>
                             <td><a href="#">Take Action</a></td>
                         </tr>
-                        <tr>
-                            <td>164</td>
-                            <td>Test2</td>
-                            <td>Test2 Dr, Missisauga, ON</td>
-                            <td>10.65.23.200</td>
-                            <td>AA-07-A0-5C-00-5G</td>
-                            <td>Medowville Library</td>
-                            <td>50 Mbps</td>
-                            <td>10 Mbps</td>
-                            <td>20</td>
-                            <td class="text-secondary">Average</td>
-                            <td><a href="#">Take Action</a></td>
-                        </tr>
-                        <tr>
-                            <td>88</td>
-                            <td>Test3</td>
-                            <td>Test3 Dr, Missisauga, ON</td>
-                            <td>10.65.23.200</td>
-                            <td>AA-07-A0-5C-00-5G</td>
-                            <td>Go station</td>
-                            <td>10 Mbps</td>
-                            <td>0.1 Mbps</td>
-                            <td>85</td>
-                            <td class="text-danger">Poor</td>
-                            <td><a href="#">Take Action</a></td>
-                        </tr>            
 
-                        <tr>
-                                <td>5</td>
-                                <td>Test</td>
-                                <td>Test Dr, Missisauga, ON</td>
-                                <td>10.65.23.200</td>
-                                <td>AA-07-A0-5C-00-5G</td>
-                                <td>Broadband</td>
-                                <td>100 Mbps</td>
-                                <td>20 Mbps</td>
-                                <td>15</td>
-                                <td class="text-info">Good</td>
-                                <td><a href="#">Take Action</a></td>
-                            </tr>
-                            <tr>
-                                <td>23</td>
-                                <td>Test2</td>
-                                <td>Test2 Dr, Missisauga, ON</td>
-                                <td>10.65.23.200</td>
-                                <td>AA-07-A0-5C-00-5G</td>
-                                <td>Broadband</td>
-                                <td>50 Mbps</td>
-                                <td>10 Mbps</td>
-                                <td>20</td>
-                                <td class="text-secondary">Average</td>
-                                <td><a href="#">Take Action</a></td>
-                            </tr>
-                            <tr>
-                                <td>44</td>
-                                <td>Test3</td>
-                                <td>Test3 Dr, Missisauga, ON</td>
-                                <td>10.65.23.200</td>
-                                <td>AA-07-A0-5C-00-5G</td>
-                                <td>Broadband</td>
-                                <td>10 Mbps</td>
-                                <td>0.1 Mbps</td>
-                                <td>85</td>
-                                <td class="text-danger">Poor</td>
-                                <td><a href="#">Take Action</a></td>
-                            </tr>            
-
-
-
-                            <tr>
-                                    <td>55</td>
-                                    <td>Test</td>
-                                    <td>Test Dr, Missisauga, ON</td>
-                                    <td>10.65.23.200</td>
-                                    <td>AA-07-A0-5C-00-5G</td>
-                                    <td>Broadband</td>
-                                    <td>100 Mbps</td>
-                                    <td>20 Mbps</td>
-                                    <td>15</td>
-                                    <td class="text-info">Good</td>
-                                    <td><a href="#">Take Action</a></td>
-                                </tr>
-                                <tr>
-                                    <td>99</td>
-                                    <td>Test2</td>
-                                    <td>Test2 Dr, Missisauga, ON</td>
-                                    <td>10.65.23.200</td>
-                                    <td>AA-07-A0-5C-00-5G</td>
-                                    <td>Broadband</td>
-                                    <td>50 Mbps</td>
-                                    <td>10 Mbps</td>
-                                    <td>20</td>
-                                    <td class="text-secondary">Average</td>
-                                    <td><a href="#">Take Action</a></td>
-                                </tr>
-                                <tr>
-                                    <td>99</td>
-                                    <td>Test3</td>
-                                    <td>Test3 Dr, Missisauga, ON</td>
-                                    <td>10.65.23.200</td>
-                                    <td>AA-07-A0-5C-00-5G</td>
-                                    <td>Broadband</td>
-                                    <td>10 Mbps</td>
-                                    <td>0.1 Mbps</td>
-                                    <td>85</td>
-                                    <td class="text-danger">Poor</td>
-                                    <td><a href="#">Take Action</a></td>
-                                </tr>            
-
-
-
-                                <tr>
-                                        <td>56</td>
-                                        <td>Test</td>
-                                        <td>Test Dr, Missisauga, ON</td>
-                                        <td>10.65.23.200</td>
-                                        <td>AA-07-A0-5C-00-5G</td>
-                                        <td>Broadband</td>
-                                        <td>100 Mbps</td>
-                                        <td>20 Mbps</td>
-                                        <td>15</td>
-                                        <td class="text-info">Good</td>
-                                        <td><a href="#">Take Action</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>78</td>
-                                        <td>Test2</td>
-                                        <td>Test2 Dr, Missisauga, ON</td>
-                                        <td>10.65.23.200</td>
-                                        <td>AA-07-A0-5C-00-5G</td>
-                                        <td>Broadband</td>
-                                        <td>50 Mbps</td>
-                                        <td>10 Mbps</td>
-                                        <td>20</td>
-                                        <td class="text-secondary">Average</td>
-                                        <td><a href="#">Take Action</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>56</td>
-                                        <td>Test3</td>
-                                        <td>Test3 Dr, Missisauga, ON</td>
-                                        <td>10.65.23.200</td>
-                                        <td>AA-07-A0-5C-00-5G</td>
-                                        <td>Broadband</td>
-                                        <td>10 Mbps</td>
-                                        <td>0.1 Mbps</td>
-                                        <td>85</td>
-                                        <td class="text-danger">Poor</td>
-                                        <td><a href="#">Take Action</a></td>
-                                    </tr>            
-
-
-
-                                    <tr>
-                                            <td>8</td>
-                                            <td>Test</td>
-                                            <td>Test Dr, Missisauga, ON</td>
-                                            <td>10.65.23.200</td>
-                                            <td>AA-07-A0-5C-00-5G</td>
-                                            <td>Broadband</td>
-                                            <td>100 Mbps</td>
-                                            <td>20 Mbps</td>
-                                            <td>15</td>
-                                            <td class="text-info">Good</td>
-                                            <td><a href="#">Take Action</a></td>
-                                        </tr>
-                                                
                     </tbody>
                 </table>
 
@@ -284,29 +120,41 @@
 
 <!--Initiating Vue.js-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
         var vmHeaders = new Vue({
             el: '#app',
+            created: function(){
+
+              this.addDataToPage();
+
+            },
             data: {
                 mainHeading: 'SmartSauga',
                 subHeading: 'IOT Status',
                 pagetitle: 'IOT Status - Smartsauga',
-                sysadmin: 'Admin'
-                   
+                sysadmin: 'Admin',
+                rowData: []
+
             },
             methods:{
               //method for refreshing the page
               refreshbtnClick: function(){
                 window.location.reload();
+              },
+              // method for calling back-end url and storing the data received from backend in rowData array
+              addDataToPage: function(){
+                axios.get('http://142.55.32.86:50224/SmartSaugaServer/GetLocationData')
+                .then(function (res){
+                  this.rowData = res.data;
+                  console.log(res.data);
+                }.bind(this));
               }
-            
+
             }
-        
-        
+
+
         });
         </script>
 
 <!--Script-->
-
-
