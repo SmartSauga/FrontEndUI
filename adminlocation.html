@@ -87,7 +87,7 @@
 
                             <!-- <button type="button" :id="rd.locationId" v-on:click="editLocationClicked">Update</button> -->
                           <!-- </a> -->
-                          <a href="#" class="btn btn-secondary a-btn-slide-text col mx-1">
+                          <a :id="rd.locationId" class="btn btn-secondary a-btn-slide-text col mx-1 text-light" @click.prevent="deleteLocationClicked">
                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                               <span><strong>Delete</strong></span>
                           </a>
@@ -153,7 +153,7 @@
 
 
 
-<!--************************************************************  Script    ************************************************************************************-->
+<!--********************  Script    ****************************-->
 
 
 <!--Initiating Vue.js-->
@@ -251,6 +251,18 @@
                     var rn = /^[a-zA-Z\s]*$/;
                     return rn.test(name);
               },
+              deleteLocationClicked:function(){
+                targetId = event.currentTarget.id;
+                console.log(targetId);
+                axios.post('http://142.55.32.86:50224/SmartSaugaServer/deleteLocationByAdmin/'+targetId)
+                .then(function (res){
+                  vmHeaders.updated = false;
+                  console.log("SUCCESS");
+                  // vmHeaders.editable= false;
+                  window.location.reload();
+
+                });
+              }
 
             }
 

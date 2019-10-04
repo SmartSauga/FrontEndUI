@@ -141,6 +141,7 @@
                 signinText: 'Sign in',
                 submitted : false,
 
+
                 errors: [],
                 password: null,
                 email: null,
@@ -171,11 +172,16 @@
                   axios.post('http://142.55.32.86:50224/SmartSaugaServer/validateUser/' + vm.email + '/' + vm.password)
                   .then(function (res){
                       if(res.data == true){
-                        vm.submitted = true;
                         axios.post('http://142.55.32.86:50224/SmartSaugaServer/returnValidateUser/'+vm.email)
                         .then(function(result){
-                          vm.name= (result.data.firstname + " " + result.data.lastname);
-                          console.log(result);
+                          console.log("CITIZEN STATUS" + result.data.type);
+                          if(result.data.type == "Citizen"){
+                            vm.submitted = true;
+                            vm.name= (result.data.firstname + " " + result.data.lastname);
+                            console.log(result);
+                        }else if(result.data.type == "Admin"){
+                            window.location.assign("http://abedisy.dev.fast.sheridanc.on.ca/Capstone-FrontEnd/adminportal.html");
+                        }
 
                         });
                       }else{
