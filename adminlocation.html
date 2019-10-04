@@ -2,10 +2,10 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
 <!--Page title-->
-<div id="app">
+<div id="app" v-cloak>
   <title>{{pagetitle}}</title>
 
 <!--Mississauga SysAdmin Nav Bar-->
@@ -44,7 +44,8 @@
             </div>
 
 <!--Creating a container-->
-            <div class=" mt-4 text-center w-100">
+
+            <div v-if="!updated" class=" mt-4 text-center w-100">
 
 
                 <table class="table">
@@ -76,34 +77,63 @@
                       <td>{{rd.latitude}}</td>
                       <td>{{rd.longitude}}</td>
                       <td>{{rd.locationRating}}</td>
-                      <td class="row">          
-                          
-                          <a href="#" class="btn btn-primary a-btn-slide-text col mx-1">
+                      <td class="row">
+
+                          <!-- <a href="#" class="btn btn-primary a-btn-slide-text col mx-1"> -->
+                      <a  :id="rd.locationId" class="btn btn-primary a-btn-slide-text col mx-1 text-light" @click.prevent="editLocationClicked">
                               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                              <span><strong>Update</strong></span>            
-                          </a>
+                              <span><strong>Update</strong></span>
+                            </a>
+
+                            <!-- <button type="button" :id="rd.locationId" v-on:click="editLocationClicked">Update</button> -->
+                          <!-- </a> -->
                           <a href="#" class="btn btn-secondary a-btn-slide-text col mx-1">
                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                              <span><strong>Delete</strong></span>            
+                              <span><strong>Delete</strong></span>
                           </a>
                           <a href="#" class="btn btn-primary a-btn-slide-text col mx-1">
                               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                               <span><strong>Block/Unblock</strong></span>            
+                               <span><strong>Block/Unblock</strong></span>
                            </a>
 
                       </td>
-
-
 
                     </tr>
                     </tbody>
                 </table>
 
+            </div>
 
 
+            <!--after submission uses VUE submitted method and if the form is validated -->
+
+            <div v-if='updated' class="container mt-4 text-center w-50">
+
+                <h5 class="text-center text-danger mt-3 text-center">Update Location</h5>
+                <p v-if="isErrorA" style="color:red;"><i>{{errorMess}}</i></p>
+                <p v-if="isErrorB" style="color:red;"><i>{{onlyAlphError}}</i></p>
+                  <form >
+                    <div class="row input-group-append mx-1 mt-4">
+                      <label class="input-group-text" for="edit-description">Location Type</label>
+                      <input class="form-control col ml-4" name="locationType" rows="3" :value="locationOb.category"required/>
+                    </div>
+                  <div class="row input-group-append mx-1 mt-4">
+                    <label class="input-group-text"  for="edit-name">Location Name</label>
+                    <input class="col form-control ml-3"  name="locationName" :value="locationOb.name" required/>
+                  </div>
+                  <div class="row input-group-append mx-1 mt-4">
+                    <label class="input-group-text"  for="edit-price">Location Address <span class="glyphicon glyphicon-euro"></span></label>
+                    <input type="text" class="col form-control ml-1" name="locationAddress" :value="locationOb.address" required/>
+                  </div>
+                  <div class="mt-4">
+                  <button type="submit" class="btn btn-primary mr-2" @click.prevent="saveButtonClicked">Save</button>
+                  <button type="button" class="btn btn-primary ml-2" @click.prevent="cancelButtonClicked">Cancel</button>
+                  </div>
+                </form>
 
 
             </div>
+
 
 </div>
 
@@ -142,7 +172,18 @@
                 subHeading: 'Locations Management',
                 pagetitle: 'Manage Locations - Smartsauga',
                 sysadmin: 'Admin',
-                rowData:[]
+                rowData:[],
+                updated:false,
+                locId:0,
+                locName:"",
+                locAddr:"",
+                locType:"",
+                errorMess:"",
+                onlyAlphError:"",
+                isErrorA: false,
+                isErrorB: false,
+                locationOb:{}
+
 
             },
             methods:{
@@ -156,7 +197,59 @@
                 .then(function (res){
                   this.rowData = res.data;
                 }.bind(this));
-              }
+              },
+              editLocationClicked: function(){
+
+                console.log("Update is clicked");
+                vmHeaders.updated = true;
+                targetId = event.currentTarget.id;
+                vmHeaders.locId = targetId;
+                console.log(targetId);
+                console.log("locId"+ vmHeaders.locId);
+                axios.get('http://142.55.32.86:50224/SmartSaugaServer/getLocId/'+targetId)
+                .then(function (locResult){
+                  vmHeaders.locationOb = locResult.data;
+                  console.log(vmHeaders.locationOb);
+                  console.log(vmHeaders.locationOb.name);
+                }.bind(this));
+
+
+              },
+              cancelButtonClicked: function(){
+                vmHeaders.updated = false;
+              },
+              saveButtonClicked: function(){
+                  vmHeaders.isErrorB = false;
+                  vmHeaders.isErrorA = false;
+                  vmHeaders.locName= document.querySelector("input[name=locationName]").value;
+                  vmHeaders.locAddr= document.querySelector("input[name=locationAddress]").value;
+                  vmHeaders.locType= document.querySelector("input[name=locationType]").value;
+                  if(vmHeaders.locName === null || vmHeaders.locName == "" || vmHeaders.locName == "undefined" || vmHeaders.locAddr === null || vmHeaders.locAddr == "" || vmHeaders.locAddr == "undefined" || vmHeaders.locType === null || vmHeaders.locType == ""|| vmHeaders.locType == "undefined"){
+                    vmHeaders.errorMess = "All fields  are required";
+                    vmHeaders.isErrorA = true;
+                  }
+
+                  if(!(this.validType(vmHeaders.locType))){
+                    console.log("ONLY ALPHABETS");
+                    vmHeaders.onlyAlphError = "Please Enter valid data";
+                    vmHeaders.isErrorB = true;
+                  }else{
+
+                    axios.post('http://142.55.32.86:50224/SmartSaugaServer/updateLocationInfo/'+vmHeaders.locId+'/'+vmHeaders.locName+'/'+vmHeaders.locAddr+'/'+vmHeaders.locType)
+                    .then(function (res){
+                      vmHeaders.updated = false;
+                      console.log("SUCCESS");
+                    });
+                  }
+
+
+
+              },
+
+              validType: function (name) {
+                    var rn = /^[A-Za-z]+$/;
+                    return rn.test(name);
+              },
 
             }
 
