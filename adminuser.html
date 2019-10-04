@@ -43,7 +43,7 @@
             </div>
 
 <!--Creating a container-->
-            <div v-if="!editable" class="container mt-4 text-center w-100">
+            <div v-if="!editable && !deletable" class="container mt-4 text-center w-100">
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -76,17 +76,17 @@
                           <td>{{rd.type}}</td>
                           <td>{{rd.status}}</td>
 
-                          <td class="row">          
-                          
-                              <a @click.prevent='editField' href="#" class="btn btn-secondary a-btn-slide-text col mx-1">
+                          <td class="row">
+
+                              <a :id="rd.email" @click.prevent='updateButtonClicked'  class="btn btn-secondary a-btn-slide-text col mx-1">
                                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                  <span><strong>Update</strong></span>            
+                                  <span><strong>Update</strong></span>
                               </a>
-                              <a href="#" class="btn btn-primary a-btn-slide-text col mx-1">
+                              <a  :id="rd.email" @click.prevent='deleteClicked' class="btn btn-primary a-btn-slide-text col mx-1">
                                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                   <span><strong>Delete</strong></span>            
+                                   <span><strong>Delete</strong></span>
                                </a>
-    
+
                           </td>
                       </tr>
                     </tbody>
@@ -102,29 +102,26 @@
             <!--If User wants to edit a field-->
             <div v-if="editable" class="container  mt-5" >
 
-
-            <div class="row input-group-append">
-                <span class="input-group-text" id="basic-addon2" >Type</span>
-                  
-            <input  type="text" class="col form-control" placeholder="Enter your Email" aria-label="Recipient's username"
-              aria-describedby="basic-addon2">
-            </div>
-
-            <div class="row input-group-append mt-3">
-                <span class="input-group-text" id="basic-addon2" >Status</span>
-                  
-            <input  type="text" class="col form-control" placeholder="Enter your Email" aria-label="Recipient's username"
-              aria-describedby="basic-addon2">
-            </div>
-
-                <div class="form-group ml-5 mr-5 mt-4">
-                        <button type="Update User Profile" class="btn btn-primary w-25" @click.prevent="update" v-cloak>Update</button>
-                        <button type="Cancle" class="btn btn-primary w-25" @click.prevent="cancle" v-cloak>Cancle</button>
-                </div>
-
-
-
+            <h2> Edit User </h2>
+            <p v-if="isErrorA" style="color:red;"><i>{{errorMess}}</i></p>
+            <p v-if="isErrorB" style="color:red;"><i>{{onlyAlphError}}</i></p>
+            <form >
+              <div class="form-group">
+                <label for="edit-description">User Type</label>
+                <input class="form-control" name="userType" :value="userOb.type" rows="3"  required/>
               </div>
+            <div class="form-group">
+              <label for="edit-name">User status</label>
+              <input class="form-control"  name="userStatus" :value="userOb.status" required/>
+            </div>
+
+            <button type="submit" class="btn btn-primary" @click.prevent="updateUser">Save</button>
+            <button type="button" class="btn btn-primary" @click.prevent="cancelButtonClicked">Cancel</button>
+            </form>
+
+          </div>
+
+
 
 </div>
 
@@ -164,8 +161,19 @@
                 pagetitle: 'Manage User - Smartsauga',
                 sysadmin: 'Admin',
                 rowData: [],
+                isErrorA : false,
+                isErrorB : false,
                 editable: false,
-                
+                deletable:false,
+                userOb: {},
+                userEmail: "",
+                userTypeN:"",
+                userStatusN:"",
+                errorMess:"",
+                onlyAlphError:"",
+
+
+
 
             },
             methods:{
@@ -181,21 +189,68 @@
                   console.log(res.data);
                 }.bind(this));
               },
-              editField: function(){
-                if (this.editable == false){
-                this.editable = true; 
-                
-              }
-                else { this.editable == true}
+              updateButtonClicked: function(){
+                vmHeaders.isErrorA = false;
+                vmHeaders.isErrorB = false;
+                this.editable = true;
+                targetId = event.currentTarget.id;
+                vmHeaders.userEmail = targetId;
+                axios.post('http://142.55.32.86:50224/SmartSaugaServer/returnValidateUser/'+targetId)
+                .then(function (locResult){
+                  vmHeaders.userOb = locResult.data;
+                }.bind(this));
+
             },
-            update: function() {
-             console.log('works'); 
+            updateUser: function() {
+              vmHeaders.isErrorA = false;
+              vmHeaders.isErrorB = false;
+             console.log('works');
+             vmHeaders.userTypeN= document.querySelector("input[name=userType]").value;
+             vmHeaders.userStatusN= document.querySelector("input[name=userStatus]").value;
+             console.log("T" + " " + vmHeaders.userTypeN);
+             console.log("T" + " " + vmHeaders.userStatusN);
+
+             if(vmHeaders.userTypeN === null || vmHeaders.userTypeN == "" || vmHeaders.userTypeN == "undefined" || vmHeaders.userStatusN === null || vmHeaders.userStatusN == "" || vmHeaders.userStatusN == "undefined" ){
+               vmHeaders.errorMess = "All fields  are required";
+               vmHeaders.isErrorA = true;
+             }
+
+             if(!(this.validType(vmHeaders.userTypeN)) || !(this.validType(vmHeaders.userStatusN))){
+               console.log("ONLY ALPHABETS");
+               vmHeaders.onlyAlphError = "Please Enter valid data";
+               vmHeaders.isErrorB = true;
+             }else{
+               axios.post('http://142.55.32.86:50224/SmartSaugaServer/updateProfile/'+vmHeaders.userEmail+'/'+vmHeaders.userTypeN+'/'+vmHeaders.userStatusN)
+               .then(function (res){
+                 vmHeaders.updated = false;
+                 console.log("SUCCESS");
+                 vmHeaders.editable= false;
+                 window.location.reload();
+
+               });
+             }
             },
-            cancle:function(){
-              if (this.editable == true){
+            cancelButtonClicked:function(){
+
                 this.editable = false;
-                
-              }
+
+
+            },
+            validType: function (name) {
+                  var rn = /^[a-zA-Z\s]*$/;
+                  return rn.test(name);
+            },
+            deleteClicked:function(){
+              targetId = event.currentTarget.id;
+              console.log(targetId);
+              axios.post('http://142.55.32.86:50224/SmartSaugaServer/deleteUserByAdmin/'+targetId)
+              .then(function (res){
+                vmHeaders.updated = false;
+                console.log("SUCCESS");
+                vmHeaders.editable= false;
+                window.location.reload();
+
+              });
             }
 
             }
