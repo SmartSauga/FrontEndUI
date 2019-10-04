@@ -239,6 +239,7 @@
                     .then(function (res){
                       vmHeaders.updated = false;
                       console.log("SUCCESS");
+                      window.location.reload();
                     });
                   }
 
@@ -247,7 +248,7 @@
               },
 
               validType: function (name) {
-                    var rn = /^[A-Za-z]+$/;
+                    var rn = /^[a-zA-Z\s]*$/;
                     return rn.test(name);
               },
 
