@@ -11,16 +11,16 @@
 
         <nav class="navbar navbar-expand-lg navbar-default" v-cloak>
           <a class="navbar-brand" href="https://web.mississauga.ca/">
-            <img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">
+            <!--<img src="images/favicon.png" width="auto" height="auto" class="d-inline-block align-top" alt="">-->
             <img src="images/logo.png" width="auto" height="20" class="d-inline-block align-center" alt="">
           </a>
 
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-item nav-link active text-light" href="mapExample.html">Wifi Locations<span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/">City Page</a>
-              <a class="nav-item nav-link text-light" href="https://web.mississauga.ca/our-organization/about-our-organization/">About</a>
-              <a class="nav-item nav-link text-light" href="http://www.mississauga.ca/portal/residents/contact">Contact</a>
+              <a class="nav-item nav-link active text-primary" href="mapExample.html">Wifi Locations<span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link text-primary" href="https://web.mississauga.ca/">City Page</a>
+              <a class="nav-item nav-link text-primary" href="https://web.mississauga.ca/our-organization/about-our-organization/">About</a>
+              <a class="nav-item nav-link text-primary" href="http://www.mississauga.ca/portal/residents/contact">Contact</a>
 
             </div>
 
@@ -30,17 +30,17 @@
           <div>
             <a class="navbar-nav navbar-right">
               <div class="font-weight-bold">
-                <label>Already have an account?</label>
-                <button class="btn btn-warning font-weight-bold">{{signinText}}</button>
+                <label class="text-primary">Already have an account?</label>
+                <button class="btn btn-primary font-weight-bold">{{signinText}}</button>
               </div>
             </a>
           </div>
           </nav>
 
 <!-- Page Heading-->
-        <div class="text-center text-primary">
-          <h1  class="my-4">{{mainHeading}}</h1>
-          <h3 class="text-center">{{subHeading}}</h3>
+        <div class="text-center text-light ">
+          <h1  class="my-4 display-2">{{mainHeading}}</h1>
+          <h3 class="text-center "><em>{{subHeading}}</em></h3>
         </div>
 
         <div class="container container-default mt-5">
@@ -73,31 +73,34 @@
 
 <!--Name Field for signup-->
             <div class="form-group">
-                    <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" for="name">Name</span>
+                    <div class="input-group input-group-sm mb-3 ">
+                            
+                            <div class="input-group-prepend ">
+                                  <span class="col input-group-text mr-5" for="name">Name</span>
                             </div>
-                            <input v-model="fname" type="text" aria-label="First name" class="form-control" placeholder="Firstname">
-                            <input v-model="lname" type="text" aria-label="Last name" class="form-control" placeholder="Lastname">
+                                
+                                  <input v-model="fname" type="text" aria-label="First name" class="form-control" placeholder="Firstname">
+                                  <input v-model="lname" type="text" aria-label="Last name" class="form-control" placeholder="Lastname">
+                                
                     </div>
 
 <!--Username field for signup-->
                            <div class="form-group">
-                                <div class="input-group mb-3">
+                                <div class="input-group input-group-sm mb-3 ">
                                         <div class="input-group-append">
-                                          <span class="input-group-text" id="basic-addon1" for="birthdate">Birthday</span>
+                                          <span class="input-group-text mr-4" id="basic-addon1" for="birthdate">Birthday</span>
                                         </div>
-                                          <input v-model="bday" type="text" class="form-control" placeholder="Please enter your birthday(mm-dd-yyyy)" aria-label="bday" aria-describedby="basic-addon1" name="bday">
+                                          <input v-model="bday" type="text" class="form-control ml-2" placeholder="Please enter your birthday(mm-dd-yyyy)" aria-label="bday" aria-describedby="basic-addon1" name="bday">
                                 </div>
                           </div>
 
 <!--Email field for signup-->
                           <div class="form-group">
-                                <div class="input-group mb-3">
+                                <div class="input-group input-group-sm mb-3 ">
                                         <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon2" for="email">Email</span>
+                                                <span class="input-group-text mr-5" id="basic-addon2" for="email">Email</span>
                                               </div>
-                                        <input id="email"  v-model="email" type="email" class="form-control" placeholder="Enter your Email" aria-label="Recipient's username" name="email"
+                                        <input id="email"  v-model="email" type="email" class="form-control ml-1" placeholder="Enter your Email" aria-label="Recipient's username" name="email"
                                           aria-describedby="basic-addon2">
                                       </div>
                           </div>
@@ -106,32 +109,32 @@
 
 <!-- field for Password-->
                           <div class="form-group">
-                                <div class="input-group mb-3">
+                                <div class="input-group input-group-sm mb-3">
                                         <div class="input-group-append">
-                                          <span class="input-group-text" id="basic-addon1" for="password">Password</span>
+                                          <span class="input-group-text mr-4" id="basic-addon1" for="password">Password</span>
                                         </div>
                                           <input v-model="password" type="password" class="form-control" placeholder="Enter a unique Password" aria-label="Password" aria-describedby="basic-addon1">
                                 </div>
 
 <!--Email field for Confirm password-->
-                                <div class="input-group">
-                                        <div class="input-group-append">
-                                          <span class="input-group-text" id="basic-addon1" for="confirmpassword">Confirm Password</span>
+                                <div class="input-group input-group-sm">
+                                        <div class="input-group-append mr-1 ">
+                                          <span class="input-group-text" id="basic-addon1" for="confirmpassword">Confirm Pass</span>
                                         </div>
                                           <input v-model="confirmpassword" type="password" class="form-control" placeholder="Re-enter Password" aria-label="Password" aria-describedby="basic-addon1">
                                 </div>
                           </div>
 
 <!--Signup button-->
-                          <div class="form-group">
-                                <label>There you go!</label>
-                                <button v-cloak @click.prevent="process" type="submit" class="btn btn-primary">Create Account</button>
+                          <div class="form-group row mt-5">
+                                <label class="col ">There you go!</label>
+                                <button v-cloak @click.prevent="process" type="submit" class="mr-3 col btn btn-success">Create Account</button>
                             </div>
 
 <!--Signin button-->
-                          <div class="form-group">
-                                <label>Already have an account?</label>
-                                <button class="btn btn-primary"><a style="color:white" href="login.html">{{signinText}}</a></button>
+                          <div class="form-group row mt-4">
+                                <label class="col">Already have an account?</label>
+                                <button class="col btn btn-success mr-3"><a style="color:white" href="login.html">{{signinText}}</a></button>
                           </div>
 
 
@@ -143,10 +146,10 @@
 
 
 <!--For Wesite decribtion only visible when not submitted -->
-    <div v-if="!submitted" class="container container-default-intro col-md-5 col-md-3">
-    <div class="appinfo text-muted">
+    <div v-if="!submitted" class="container container-default-intro mt-4 col-md-5 col-md-3">
+    <div class="appinfo lead" style="color: #D69DA9;">
 
-      <h5>A step towards a smarter mississauga. In partnership with Sheridan College</h5>
+      <h5><em>A step towards a smarter mississauga. In partnership with Sheridan College</em></h5>
       <p>City of mississauga is known for its advance tecnological development. This website is built in partnership with Sheridan Faculty of Applied Science & Technology</p>
       <div>
         <p>This app is designed by Sheridan capstone students. To help create a differnece in todays society.

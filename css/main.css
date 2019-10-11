@@ -20,14 +20,14 @@ footer
 
 /*for navbar*/
 .navbar-default {
-    background-color: #007acc;
+    background-color: #FFDBAC;
     height: 80px;
   }
 
   /*for account creation container*/
 .container-default{
     position: absolute;
-    background-color: gainsboro;
+    background-color: #4f4da8;
     right: 220px;
     width: auto;
     height: auto;
