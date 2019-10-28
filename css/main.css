@@ -1,6 +1,6 @@
 body {
   /*background-color: paleturquoise;*/
-  background-color:#6F448D;
+  background-color:#5C3A75;
   color: white;
   
 }
@@ -20,14 +20,14 @@ footer
 
 /*for navbar*/
 .navbar-default {
-    background-color: #FFDBAC;
+    background-color: #D69DA9;
     height: 80px;
   }
 
   /*for account creation container*/
 .container-default{
     position: absolute;
-    background-color: #4f4da8;
+    background-color: #5C3A75;
     right: 220px;
     width: auto;
     height: auto;
