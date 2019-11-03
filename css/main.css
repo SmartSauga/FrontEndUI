@@ -3,7 +3,8 @@ body {
   /*background-color: paleturquoise;*/
   background-color:#5C3A75;
   color: white;
-  
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 footer
@@ -12,10 +13,12 @@ footer
     color: aliceblue;
     text-align:center;
     bottom: 0;
-    height:75px;
+    height:50px;
     background-color:black;
     clear: both;
     position: fixed;
+    overflow-x: hidden;
+    width: 100%;
 
 }
 
