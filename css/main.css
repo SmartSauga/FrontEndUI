@@ -105,3 +105,5 @@ a.btn {
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
 }
+.checked {
+  color: orange;
